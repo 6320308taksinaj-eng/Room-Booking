@@ -1,5 +1,8 @@
 require('dotenv').config();
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require('../swagger-output.json');
+
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -12,6 +15,8 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
 app.use('/rooms', roomRoutes);
 app.use('/users', userRoutes);
 app.use('/bookings', bookingRoutes);
@@ -22,5 +27,9 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log('='.repeat(50));
+  console.log(`🚀 Server: http://localhost:${PORT}`);
+  console.log(`📚 API Docs: http://localhost:${PORT}/api-docs`);
+  console.log('='.repeat(50));
 });
+
