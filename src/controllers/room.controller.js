@@ -68,7 +68,7 @@ exports.getRoomById = async (req, res) => {
 
   try {
     const room = await prisma.room.findUnique({
-      select: { id: true, name: true, capacity: true }, //projection
+      //select: { id: true, name: true, capacity: true }, //projection
       where: { id: roomId },
       include: {
         bookings: { include: { user: true } },
