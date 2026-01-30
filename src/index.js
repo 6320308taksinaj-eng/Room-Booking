@@ -11,6 +11,7 @@ const roomRoutes = require('./routes/room.route');
 const userRoutes = require('./routes/user.route');
 const bookingRoutes = require('./routes/booking.route');
 
+app.use('/images', express.static('images'));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
